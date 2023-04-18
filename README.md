@@ -1,43 +1,31 @@
-AI Image Generator
-This is a project that generates images using a pre-trained GAN (Generative Adversarial Network) model. The user inputs a sentence and the model generates an image based on that sentence.
+# ImageGeneratorAI
 
-Getting Started
-To get started with this project, you'll need to install Python 3 and a few libraries:
+This is a Telegram bot that generates images from text descriptions using a pre-trained generative model. The bot is based on Python and PyTorch and uses the Telegram Bot API.
 
-torch
-torchvision
-python-telegram-bot
-You can install these libraries using pip:
+## Getting started
 
+To use the bot, you need to have a Telegram account and install the Telegram app on your mobile device or desktop computer. Then, follow these steps:
 
-pip install torch torchvision python-telegram-bot
-Once you have the libraries installed, you can run the program using the following command:
+1. Clone the repository or download the source code.
+2. Install the required dependencies by running `pip install -r requirements.txt`.
+3. Create a new Telegram bot and obtain the API token from [BotFather](https://core.telegram.org/bots#6-botfather).
+4. Set the API token as an environment variable by running `export TELEGRAM_API_TOKEN=<your token>` on Linux or `set TELEGRAM_API_TOKEN=<your token>` on Windows.
+5. Start the bot by running `python ImageGeneratorAI.py`.
 
+## Troubleshooting
 
-python ImageGeneratorAI.py
-Troubleshooting
-If you encounter any problems while running this program, feel free to contact me at AhmeedSheeko@gmail.com.
+If you encounter any problems while running the bot, please check the following:
 
-One common issue that has been reported is a traceback error that looks like this:
+* Make sure that you have installed all the required dependencies and configured the environment variables correctly.
+* If you get an error message that says `ValueError: too many dimensions 'str'`, try modifying the `get_latent_code` function in `ImageGeneratorAI.py` as follows:
 
-Traceback (most recent call last):
-   File "C:\Users\PC\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\telegram\ext\dispatcher.py", line 555, in process_update
-     handler. handle_update(update, self, check, context)
-   File "C:\Users\PC\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\telegram\ext\handler.py", line 198, in handle_update
-     return self. callback(update, context)
-   File "e:\Projects\AI Genrate Images\ImageGeneratorAI.py", line 154, in <lambda>
-     start_handler = CommandHandler('start', lambda update, context: start(update, context, my_generator), pass_args=True, pass_job_queue=True, pass_chat_data=True)
-   File "e:\Projects\AI Genrate Images\ImageGeneratorAI.py", line 53, in start
-     generate_image(update, context, my_generator)
-   File "e:\Projects\AI Genrate Images\ImageGeneratorAI.py", line 87, in generate_image
-     latent_code = get_latent_code(input_text, my_generator)
-   File "e:\Projects\AI Genrate Images\ImageGeneratorAI.py", line 119, in get_latent_code
-     text_tensor = torch. Tensor([input_text])
-ValueError: too many dimensions 'str'
+```python
+def get_latent_code(input_text, generator):
+    with torch.no_grad():
+        text_tensor = torch.Tensor([input_text])
+        return generator.encode(text_tensor.cuda())
 
-If you encounter this error, it's likely because the input text has too many dimensions. You can try converting the input text to a 1-dimensional tensor like this:
+If you still cannot solve the problem, please contact the developer at AhmeedSheeko@gmail.com.
 
-scss
-
-text_tensor = torch.Tensor([input_text]).squeeze()
-I hope this helps, and happy generating!
+## Acknowledgements
+The generative model used in this project is a pre-trained version of the StyleGAN2-ADA model developed by NVIDIA. The Telegram Bot API is provided by Telegram. Special thanks to OpenAI for providing the GPT-3.5 architecture for training the ChatGPT language model used to develop this bot.
