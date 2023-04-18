@@ -24,6 +24,7 @@ def get_latent_code(input_text, generator):
     with torch.no_grad():
         text_tensor = torch.Tensor([input_text])
         return generator.encode(text_tensor.cuda())
+        ```
 
 If you still cannot solve the problem, please contact the developer at AhmeedSheeko@gmail.com.
 
