@@ -42,7 +42,7 @@ torch.save(data_loader, 'data_loader.pth')
 generator = torch.load('data_loader.pth')
 
 # Replace YOUR_TOKEN with your bot's API token
-bot = telegram.Bot(token='6121468637:AAHfUZy_1wGXN9W5ZxHo5P8gogMJY4X6o6c')
+bot = telegram.Bot(token='put your bot api here')
 
 def start(update, context, my_generator):
     context.bot.send_message(chat_id=update.effective_chat.id, text="Hello! Please describe the image you want me to generate. Be as specific as possible, such as the colors, objects, shapes, etc.")
@@ -142,7 +142,7 @@ def reply(update, context):
 
 
 def main():
-    updater = Updater(token='6121468637:AAHfUZy_1wGXN9W5ZxHo5P8gogMJY4X6o6c', use_context=True)
+    updater = Updater(token='put your bot api here', use_context=True)
     dispatcher = updater.dispatcher
 
     # Create a generator object
